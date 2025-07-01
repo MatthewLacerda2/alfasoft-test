@@ -1,13 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using Alfasoft.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure MariaDB connection
+var connectionString = builder.Configuration.GetConnectionString("MariaDB")
+    ?? throw new InvalidOperationException("Connection string 'MariaDB' not found.");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(
-        builder.Configuration.GetConnectionString("MariaDB"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MariaDB"))
+        connectionString,
+        ServerVersion.AutoDetect(connectionString)
     )
 );
 

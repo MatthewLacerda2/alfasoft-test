@@ -5,6 +5,12 @@ namespace Alfasoft.Models;
 
 public class Contact
 {
+    public Contact()
+    {
+        Name = string.Empty;
+        ContactNumber = string.Empty;
+        Email = string.Empty;
+    }
 
     public int Id { get; set; }
 

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Alfasoft.Models;
 
-namespace Alfasoft;
+namespace Alfasoft.Context;
 
 public class ApplicationDbContext : DbContext
 {

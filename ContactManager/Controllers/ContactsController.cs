@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Alfasoft.Models;
+using Alfasoft.Context;
 
 namespace ContactManager.Controllers;
 

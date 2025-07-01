@@ -1,10 +1,53 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Contacts";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Contact List</h1>
+
+<form method="post" asp-page-handler="Add" class="mb-3">
+    <div class="row g-2 align-items-end">
+        <div class="col">
+            <input asp-for="NewContact.Name" class="form-control" placeholder="Name" />
+        </div>
+        <div class="col">
+            <input asp-for="NewContact.ContactNumber" class="form-control" placeholder="Contact Number" />
+        </div>
+        <div class="col">
+            <input asp-for="NewContact.Email" class="form-control" placeholder="Email" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Contact Number</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model.Contacts)
+        {
+            <tr>
+                <td>@contact.Id</td>
+                <td>@contact.Name</td>
+                <td>@contact.ContactNumber</td>
+                <td>@contact.Email</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@contact.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@contact.Id" style="display:inline" onsubmit="return confirm('Are you sure?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
