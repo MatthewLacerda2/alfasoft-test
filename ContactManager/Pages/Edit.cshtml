@@ -1,0 +1,54 @@
+@page "{id:int}"
+@model EditModel
+@{
+    ViewData["Title"] = "Edit Contact";
+}
+
+<div class="container">
+    <h1>Edit Contact</h1>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+
+    <form method="post" asp-page-handler="Save" class="mb-3">
+        <input type="hidden" asp-for="Contact.Id" />
+        
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Contact.Name" class="form-label">Name</label>
+                <input asp-for="Contact.Name" class="form-control" />
+                <span asp-validation-for="Contact.Name" class="text-danger"></span>
+            </div>
+            
+            <div class="col-md-6">
+                <label asp-for="Contact.ContactNumber" class="form-label">Contact Number</label>
+                <input asp-for="Contact.ContactNumber" class="form-control" />
+                <span asp-validation-for="Contact.ContactNumber" class="text-danger"></span>
+            </div>
+            
+            <div class="col-12">
+                <label asp-for="Contact.Email" class="form-label">Email</label>
+                <input asp-for="Contact.Email" class="form-control" />
+                <span asp-validation-for="Contact.Email" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to save these changes?');">
+                Save
+            </button>
+            <button type="submit" asp-page-handler="Cancel" class="btn btn-secondary" onclick="return confirm('Are you sure you want to cancel? This will reset the form to original values.');">
+                Cancel
+            </button>
+            <a asp-page="/Index" class="btn btn-outline-secondary">Back to List</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
