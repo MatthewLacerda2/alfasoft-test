@@ -25,8 +25,7 @@ using (var scope = app.Services.CreateScope())
     if (dbContext != null && dbContext.Database.GetDbConnection().State != ConnectionState.Open)
     {
         dbContext.Database.OpenConnection();
-        dbContext.Database.EnsureCreated(); // optional if you also use Migrations
-        // OR use dbContext.Database.Migrate(); if using migrations
+        dbContext.Database.Migrate();
     }
 }
 

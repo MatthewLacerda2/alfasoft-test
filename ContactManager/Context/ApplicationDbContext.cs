@@ -20,10 +20,6 @@ public class ApplicationDbContext : DbContext
             .IsUnique();
 
         modelBuilder.Entity<Contact>()
-            .HasIndex(c => c.ContactNumber)
-            .IsUnique();
-
-        modelBuilder.Entity<Contact>()
             .Property(c => c.Name)
             .IsRequired()
             .HasMaxLength(255);
